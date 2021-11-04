@@ -3,28 +3,49 @@ package com.example.compose_ui_demo.pages
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.compose_ui_demo.navigation.Routes
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomePage(navController: NavHostController, name: String) {
 
     var selectedTabIndex by remember { mutableStateOf(0) }
 
+    // Snackbar and Drawer
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = {
                     Text(text = "Demo Compose")
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        scope.launch {
+                            scaffoldState.drawerState.apply {
+                                if (isClosed) open() else close()
+                            }
+                        }
+                    }) {
+                        Icon(Icons.Default.Menu, "Menu")
+                    }
                 },
                 actions = {
                     Button(onClick = {
@@ -36,6 +57,10 @@ fun HomePage(navController: NavHostController, name: String) {
                 }
             )
         },
+        drawerContent = {
+            Text("Drawer title", modifier = Modifier.padding(16.dp))
+            Divider()
+        },
         content = {
             Column {
                 LinearLayoutBox(name = name)
@@ -44,8 +69,21 @@ fun HomePage(navController: NavHostController, name: String) {
                 WeightBox()
             }
         },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                scope.launch {
+                    scaffoldState.snackbarHostState.showSnackbar("Snackbar")
+                }
+            }) {
+
+            }
+        },
+        isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
+                cutoutShape = MaterialTheme.shapes.small.copy(
+                    CornerSize(percent = 50)
+                ),
                 content = {
                     TabRow(selectedTabIndex = selectedTabIndex) {
                         Tab(selected = selectedTabIndex == 0, onClick = {

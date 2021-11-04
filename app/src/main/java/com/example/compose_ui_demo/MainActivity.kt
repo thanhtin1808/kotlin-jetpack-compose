@@ -30,7 +30,7 @@ fun ScreenMain() {
 
     NavHost(navController = navController, startDestination = Routes.HomePage.route) {
         composable(Routes.HomePage.route) { HomePage(navController, "AAA") }
-        composable(Routes.DemoListActivity.route) { DemoListActivity() }
+        composable(Routes.DemoListActivity.route) { DemoListActivity(navController) }
     }
 }
 
