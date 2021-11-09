@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.compose_ui_demo">
 
     <application
@@ -14,6 +15,11 @@
             android:exported="false"
             android:label="@string/title_activity_demo_list"
             android:theme="@style/Theme.Composeuidemo.NoActionBar" />
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Composeuidemo.NoActionBar"
+            tools:ignore="MissingClass" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

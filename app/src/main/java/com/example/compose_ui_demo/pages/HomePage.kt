@@ -12,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
@@ -69,15 +68,15 @@ fun HomePage(navController: NavHostController, name: String) {
                 WeightBox()
             }
         },
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                scope.launch {
-                    scaffoldState.snackbarHostState.showSnackbar("Snackbar")
-                }
-            }) {
-
-            }
-        },
+//        floatingActionButton = {
+//            FloatingActionButton(onClick = {
+//                scope.launch {
+//                    scaffoldState.snackbarHostState.showSnackbar("Snackbar")
+//                }
+//            }) {
+//
+//            }
+//        },
         isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomAppBar(
@@ -96,7 +95,7 @@ fun HomePage(navController: NavHostController, name: String) {
                             selectedTabIndex = 1
                             Log.d("AAAA", "Click 2")
                         }) {
-                            Text(text = "BBBB")
+                            Text(text = "HOME")
                         }
                         Tab(selected = selectedTabIndex == 2, onClick = {
                             selectedTabIndex = 2
